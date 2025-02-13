@@ -14,6 +14,9 @@ Deep learning approaches have achieved state-of-the-art performance for automati
 
 BRATS 2020 Dataset BRATS 2020 is a recently published benchmark dataset for the purpose of segmenting the brain tumor. Indeed, a number of studies have already used this dataset for reporting and comparing their results. This 3D multimodal MRI dataset consists of 369 training cases, 125 validation cases 166 test cases. Amoung the training cases, 293 cases include the HGG tumor and 76 cases include the LGG tumor.
 
+![image](https://github.com/user-attachments/assets/e30cc6eb-1ba6-4f29-96bc-e9d966534958)
+
+
 MRI Brain Tumor Detection using the BRATS 2020 dataset with a VGG16-based architecture is an approach for classifying brain tumor types from MRI images. VGG16, a Convolutional Neural Network (CNN) model known for its simplicity and depth, is often utilized in image classification tasks.
 
 Overview of the Process
