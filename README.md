@@ -90,6 +90,9 @@ Evaluation:
 Once the model is trained, evaluate it using test data to check accuracy, precision, recall, and F1-score.
 Consider visualizing the results using confusion matrices or ROC curves to understand the model's performance better.
 
+![image](https://github.com/user-attachments/assets/64a35446-6d6f-445a-b2bd-8a7c735aff0c)
+
+
 Conclusion:
 
 Using VGG16 for brain tumor detection is a powerful way to leverage deep learning for medical image classification. By utilizing transfer learning with the pre-trained weights from ImageNet, the model can generalize well, even for a specialized dataset like BRATS. The final softmax output allows the model to classify MRI images into different categories based on the type of tumor detected.
