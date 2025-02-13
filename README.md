@@ -67,6 +67,10 @@ model.add(Dense(len(unique_labels), activation='softmax')).
 
 The 'softmax' activation function is used to give a probability distribution over the possible classes.
 
+![image](https://github.com/user-attachments/assets/8325481e-5ef8-4b47-bfd6-2c1e25e47a10)
+
+
+
 
 Key Points:
 
