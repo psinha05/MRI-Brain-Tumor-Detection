@@ -42,20 +42,25 @@ The final layer is a softmax layer with a number of units corresponding to the n
 Softmax Activation: This layer converts the output to probabilities for each class.
 
 Key Points:
+
+
 Pre-trained Weights: VGG16 is typically used with weights pre-trained on ImageNet, which helps in faster convergence and better performance for image classification tasks.
 Fine-tuning: we have choose to fine-tune some of the layers of VGG16 by unfreezing (2nd, 3rd, 4th last layer) the base layers after training the model with the frozen base.
 Dropout: Dropout layers can be added between fully connected layers to prevent overfitting (Dropout upto 20%)
 Optimizer: Adam optimizer is commonly used, as it adapts the learning rate during training.
 
 Training the Model:
+
 Train the model using the prepared MRI dataset, specifying a loss function (categorical cross-entropy for multi-class classification), and an optimizer (like Adam).
 During training, the model learns to map input MRI images to their corresponding tumor type classifications.
 
 Evaluation:
+
 Once the model is trained, evaluate it using test data to check accuracy, precision, recall, and F1-score.
 Consider visualizing the results using confusion matrices or ROC curves to understand the model's performance better.
 
 Conclusion:
+
 Using VGG16 for brain tumor detection is a powerful way to leverage deep learning for medical image classification. By utilizing transfer learning with the pre-trained weights from ImageNet, the model can generalize well, even for a specialized dataset like BRATS. The final softmax output allows the model to classify MRI images into different categories based on the type of tumor detected.
 
 
