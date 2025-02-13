@@ -1,32 +1,51 @@
-# MRI-Brain-Tumor-Detection : 
-Brain tumors are classified as primary (originating in the brain) or secondary (metas-tasizing from elsewhere). Gliomas are the most prevalent malignant primary brain tumor in adults, accounting for 80%.According to the WHO, gliomas are classified into four grades: low grade (LGG) (grades 1-2), which are less prevalent and have low blood concentration and sluggish growth, and high grade (HGG) (grades 3-4), which have rapid growth and aggressiveness.
+# MRI Brain Tumor Detection : 
+
+The detection of brain tumors is a critical task in the field of medical imaging, as it can significantly impact patient outcomes. However, accurately detecting brain tumors can be challenging due to the complex nature of the human brain and the variability in the appearance of tumors. Therefore, there is a need for an automated and accurate brain tumor detection system that can assist healthcare professionals in diagnosing brain tumors.
+
+The goal of this project is to develop a brain tumor detection system that can accurately classify brain scans as either containing a tumor or not. We aim to create a model that can handle the variability in brain scans and provide accurate results in a timely manner. Additionally, we aim to develop a user-friendly interface that can make our model accessible to healthcare professionals and patients alike.
+
+To achieve our goal, we will use a dataset consisting of brain scan images with and without tumors. We will preprocess and augment the dataset to increase its size and variability. We will then use a pre-trained VGG16 model to train the data and generate predictions for new images.
+
+Finally, we will create a web-based interface using Flask and HTML that allows users to upload and analyze brain scans using our model. By providing a user-friendly and accessible brain tumor detection system, we aim to improve the accuracy and speed of brain tumor diagnosis, ultimately leading to better patient outcomes.
 
 In This application we have using the BRATS-2020 dataset, Early diagnosis of brain tumor can help one avoiding the painful consequences as well as the life risk. Eventually, this diagnosis is the most crucial part since manual delineation of tumor form brain MRI is quite time consuminig and laborious also. A number of advanced Magnetic Resonance Imaging (MRI) techniques that include Diffusion Tensor Imaging (DTI), MR Spectroscopy (MRS) and Perfusion MR are used for the analysis of brain tumor through MRI.
 
-Deep learning approaches have achieved state-of-the-art performance for automatic brain tumor segmentation using multi-model MRIs. CNN is a highly effective method for picture ecognition and prediction. CNN is predominantly employed for brain tumor seg-mentation, classification, and survival time prediction. 
+Deep learning approaches have achieved state-of-the-art performance for automatic brain tumor segmentation using multimodel MRIs. CNN is a highly effective method for picture ecognition and prediction. CNN is predominantly employed for brain tumor segmentation, classification, and survival time prediction. 
 
-BRATS 2020 Dataset BRATS 2020 is a recently published benchmark dataset for the purpose of segment-ing the brain tumor.Indeed, a number of studies have already used this dataset for reporting and comparing their results. This 3D multimodal MRI dataset consists of 369 training cases, 125 validation cases 166 test cases. Among the training cases, 293 cases include the HGG tumor and 76 cases include the LGG tumor.
+BRATS 2020 Dataset BRATS 2020 is a recently published benchmark dataset for the purpose of segmenting the brain tumor. Indeed, a number of studies have already used this dataset for reporting and comparing their results. This 3D multimodal MRI dataset consists of 369 training cases, 125 validation cases 166 test cases. Amoung the training cases, 293 cases include the HGG tumor and 76 cases include the LGG tumor.
 
 MRI Brain Tumor Detection using the BRATS 2020 dataset with a VGG16-based architecture is an approach for classifying brain tumor types from MRI images. VGG16, a Convolutional Neural Network (CNN) model known for its simplicity and depth, is often utilized in image classification tasks.
 
 Overview of the Process
 
 Data Preprocessing:
+
 BRATS Dataset: The BRATS 2020 dataset is a collection of multimodal MRI scans (Flair, T1, T1c, T2) with labeled data indicating the presence and types of brain tumors. The goal is to detect and classify tumors from MRI scans, typically into categories like "Glioma," "Meningioma," or "No Tumor."
 
 Preprocessing Steps:
+
 Resizing the input images to fit the model (typically 128x128 pixels for VGG16).Normalization of pixel values to a range (e.g., 0 to 1) by dividing by 255.
 Data augmentation (if necessary) to improve model generalization, like rotation, scaling, or flipping.
 
 Model Architecture (using VGG16):
+
 VGG16, which is a pre-trained convolutional neural network (CNN) for image classification.
 
-First, the VGG16 model is loaded with input_shape=(IMAGE_SIZE,IMAGE_SIZE,3), include_top=False, weights='imagenet'. The input shape is set to match the size of the images in the dataset, which is 128x128 pixels. The include_top parameter is set to False, which means that the final fully-connected layers of VGG16 that perform the classification will not be included. The weights parameter is set to 'imagenet' which means that the model will be pre-trained with a dataset of 1.4 million images called imagenet.
+First, the VGG16 model is loaded with input_shape=(IMAGE_SIZE, IMAGE_SIZE, 3), include_top=False, weights='imagenet'. 
+
+The input shape is set to match the size of the images in the dataset, which is 128x128 pixels. The include_top parameter is set to False, which means that the final fully-connected layers of VGG16 that perform the classification will not be included. The weights parameter is set to 'imagenet' which means that the model will be pre-trained with a dataset of 1.4 million images called imagenet.
 
 
 Next, the for layer in base_model.layers: loop is used to set all layers of the base_model (VGG16) to non-trainable, so that the weights of these layers will not be updated during training.
 
-Then, the last three layers of the VGG16 model are set to trainable by using base_model.layers[-2].trainable = True,base_model.layers[-3].trainable = True and base_model.layers[-4].trainable = True
+Then, the last three layers of the VGG16 model are set to trainable by using 
+
+base_model.layers[-2].trainable = True,
+
+base_model.layers[-3].trainable = True and 
+
+base_model.layers[-4].trainable = True
+
 
 After that, a Sequential model is created and the VGG16 model is added to it with model.add(base_model).
 
@@ -42,7 +61,11 @@ After that, a dense layer is added with 128 neurons and relu activation function
 Next, another Dropout layer is added with model.add(Dropout(0.2))
 
 
-Finally, the output dense layer is added with number of neurons equal to the number of unique labels and 'softmax' activation function is added with model.add(Dense(len(unique_labels), activation='softmax')). The 'softmax' activation function is used to give a probability distribution over the possible classes.
+Finally, the output dense layer is added with number of neurons equal to the number of unique labels and 'softmax' activation function is added with 
+
+model.add(Dense(len(unique_labels), activation='softmax')). 
+
+The 'softmax' activation function is used to give a probability distribution over the possible classes.
 
 
 Key Points:
