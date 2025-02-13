@@ -6,3 +6,7 @@ In This application we have using the BRATS-2020 dataset, Early diagnosis of bra
 Deep learning approaches have achieved state-of-the-art performance for automatic brain tumor segmentation using multi-model MRIs. CNN is a highly effective method for picture ecognition and prediction. CNN is predominantly employed for brain tumor seg-mentation, classification, and survival time prediction. 
 
 BRATS 2020 Dataset BRATS 2020 is a recently published benchmark dataset for the purpose of segment-ing the brain tumor.Indeed, a number of studies have already used this dataset for reporting and comparing their results. This 3D multimodal MRI dataset consists of 369 training cases, 125 validation cases 166 test cases. Among the training cases, 293 cases include the HGG tumor and 76 cases include the LGG tumor.
+
+Classification of Brain Tumor:
+
+
