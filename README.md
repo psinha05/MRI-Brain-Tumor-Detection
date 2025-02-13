@@ -19,27 +19,31 @@ Resizing the input images to fit the model (typically 128x128 pixels for VGG16).
 Data augmentation (if necessary) to improve model generalization, like rotation, scaling, or flipping.
 
 Model Architecture (using VGG16):
-VGG16 is used as a base model in the sequential architecture. It consists of a series of convolutional layers followed by max-pooling layers. Here’s the flow and structure of VGG16:
-VGG16 Layers:
+VGG16, which is a pre-trained convolutional neural network (CNN) for image classification.
 
-Convolutional Layers:
-These layers apply filters to input images to detect patterns like edges, textures, and shapes. VGG16 uses a stack of convolution layers with 3x3 kernels and strides of 1.
-Fully Connected Layers (Dense Layers): After the convolutional layers, the 3D feature maps are flattened into 1D vectors and passed through fully connected layers:
-Dense(output size, e.g., 3 for three classes in the tumor classification).
-These dense layers use ReLU activation functions, except the final output layer.
+First, the VGG16 model is loaded with input_shape=(IMAGE_SIZE,IMAGE_SIZE,3), include_top=False, weights='imagenet'. The input shape is set to match the size of the images in the dataset, which is 128x128 pixels. The include_top parameter is set to False, which means that the final fully-connected layers of VGG16 that perform the classification will not be included. The weights parameter is set to 'imagenet' which means that the model will be pre-trained with a dataset of 1.4 million images called imagenet.
 
-Output Layer: The output layer uses Softmax activation for multi-class classification. Softmax assigns probabilities to each class and the class with the highest probability is selected as the output. This is crucial for distinguishing between different tumor types (or identifying no tumor).
 
-Sequence Model Design:
-Input Layer: This layer is typically a 128x128 image (RGB channels) that is fed into the VGG16 architecture.
-Base VGG16 Model: The pretrained VGG16 is used as the base model, where the convolutional and pooling layers extract high-level features.
-Additional Dense Layers: Once the features are extracted, a few additional fully connected layers are added for classification:
-A Dense layer with ReLU activation.
-Another Dense layer with ReLU activation.
-Output Dense layer with Softmax for the final classification (e.g., “No Tumor,” “Glioma,” or “Meningioma”).
+Next, the for layer in base_model.layers: loop is used to set all layers of the base_model (VGG16) to non-trainable, so that the weights of these layers will not be updated during training.
 
-The final layer is a softmax layer with a number of units corresponding to the number of classes you want to classify. In tumor detection, this is usually 3: no tumor, glioma, or meningioma.
-Softmax Activation: This layer converts the output to probabilities for each class.
+Then, the last three layers of the VGG16 model are set to trainable by using base_model.layers[-2].trainable = True,base_model.layers[-3].trainable = True and base_model.layers[-4].trainable = True
+
+After that, a Sequential model is created and the VGG16 model is added to it with model.add(base_model).
+
+
+Next, a Flatten layer is added to the model with model.add(Flatten()) which reshapes the output of the VGG16 model from a 3D tensor to a 1D tensor, so that it can be processed by the next layers of the model.
+
+Then, a Dropout layer is added with model.add(Dropout(0.3)) which is used to prevent overfitting by randomly setting a fraction of input units to 0 at each update during training time.
+
+
+After that, a dense layer is added with 128 neurons and relu activation function is added with model.add(Dense(128, activation='relu')).
+
+
+Next, another Dropout layer is added with model.add(Dropout(0.2))
+
+
+Finally, the output dense layer is added with number of neurons equal to the number of unique labels and 'softmax' activation function is added with model.add(Dense(len(unique_labels), activation='softmax')). The 'softmax' activation function is used to give a probability distribution over the possible classes.
+
 
 Key Points:
 
